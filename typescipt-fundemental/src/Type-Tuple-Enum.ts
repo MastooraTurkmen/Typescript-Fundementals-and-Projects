@@ -14,12 +14,21 @@ console.log(randomPerson[0]);
 
 let susan: [string, number?] = ["susan"];
 
+console.log(person, date, susan);
+
 // Enum
 
 enum ServerResponseStatus {
   Success = 200,
   Error = "Error",
 }
+
+Object.values(ServerResponseStatus).forEach((value) => {
+  if (typeof value === "number") {
+    console.log();
+    
+  }
+})
 
 console.log(ServerResponseStatus);
 
