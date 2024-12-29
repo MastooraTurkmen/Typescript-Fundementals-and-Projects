@@ -26,9 +26,8 @@ enum ServerResponseStatus {
 Object.values(ServerResponseStatus).forEach((value) => {
   if (typeof value === "number") {
     console.log();
-    
   }
-})
+});
 
 console.log(ServerResponseStatus);
 
@@ -47,3 +46,31 @@ function getServerResponse(): ServerResponse {
 const response: ServerResponse = getServerResponse();
 
 console.log(response.result);
+
+// Challenge
+
+enum UserRole {
+  Admin,
+  Manager,
+  Employee,
+}
+
+type User = {
+  id: number;
+  name: string;
+  role: UserRole;
+  contact: [string, string];
+};
+
+function createUser(user: User): User {
+  return user;
+}
+
+const user: User = createUser({
+  id: 1,
+  name: "john",
+  role: UserRole.Admin,
+  contact: ["john@test.com", "1234"],
+});
+
+console.log(user);
