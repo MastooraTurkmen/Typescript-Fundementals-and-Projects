@@ -57,3 +57,62 @@ printLength("");
 printLength(null);
 // printLength();
 printLength(undefined);
+
+// Type Guards - Type Instanceof
+
+try {
+  throw new Error("This is an error");
+} catch (error) {
+  if (error instanceof Error) {
+    console.log(`Caught an Error object: ${error.message}`);
+  } else {
+    console.log(`Unknown Error`);
+  }
+}
+
+function checkInput(input: Date | string): string {
+  if (input instanceof Date) {
+    return input.getFullYear().toString();
+  }
+  return input;
+}
+
+const year = checkInput(new Date());
+const randomYear = checkInput(`2020-03-30`);
+
+console.log(year);
+console.log(randomYear);
+
+// Type Guards - Type Predicate
+
+type Student = {
+  name: string;
+  study: () => void;
+};
+
+type User = {
+  name: string;
+  login: () => void;
+};
+
+type Person = Student | User;
+
+const randomPerson = (): Person => {
+  return Math.random() > 0.5
+    ? { name: "john", study: () => console.log("Studying") }
+    : { name: "mary", study: () => console.log("Logging in") };
+};
+
+const person = randomPerson();
+
+console.log(person);
+
+function isStudent(person: Person): person is Student {
+  return (person as Student).study !== undefined;
+}
+
+if (isStudent(person)) {
+  person.study();
+} else {
+  person.login();
+}
