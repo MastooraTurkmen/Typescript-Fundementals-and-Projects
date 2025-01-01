@@ -116,3 +116,42 @@ if (isStudent(person)) {
 } else {
   person.login();
 }
+
+// Type Guards - Type Discriminant
+
+type IncrementAction = {
+  type: "increment";
+  amount: number;
+  timestamp: number;
+  user: string;
+};
+
+type DecrementAction = {
+  type: "decrement";
+  amount: number;
+  timestamp: number;
+  user: string;
+};
+
+type Action = IncrementAction | DecrementAction;
+
+function reducer(state: number, action: Action) {
+  switch (action.type) {
+    case "increment":
+      return state + action.amount;
+    case "decrement":
+      return state - action.amount;
+    default:
+      const unexpectedAction: never = action;
+      throw new Error(`Unexpected action: ${unexpectedAction}`);
+  }
+}
+
+const newState = reducer(0, {
+  user: "john",
+  type: "decrement",
+  amount: 5,
+  timestamp: 22828,
+});
+
+console.log(newState);
